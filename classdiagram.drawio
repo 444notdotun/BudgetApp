@@ -1,0 +1,73 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="45sTiXx0xm_fZcnllBS_">
+    <mxGraphModel dx="454" dy="864" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-1" value="Budget App — Class Diagram" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="10" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-2" value="User" style="swimlane;fontStyle=1;align=center;startSize=30;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="220" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-3" value="- id: String&#xa;- email: String&#xa;- password: String&#xa;- templates: List&lt;BudgetTemplate&gt;&#xa;- budgets: List&lt;MonthlyBudget&gt;" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-2">
+          <mxGeometry y="30" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-4" value="" style="line;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-2">
+          <mxGeometry y="120" width="220" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-5" value="+ createBudget(): void&#xa;+ createTemplate(): void&#xa;+ editBudget(): void&#xa;+ viewBudget(): MonthlyBudget&#xa;+ deleteBudget(): void" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-2">
+          <mxGeometry y="128" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-6" value="BudgetTemplate" style="swimlane;fontStyle=1;align=center;startSize=30;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="340" y="60" width="240" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-7" value="- id: String&#xa;- year: int&#xa;- userId: String&#xa;- monthlyBudgets: Map&lt;Month, MonthlyBudget&gt;&#xa;- createdAt: LocalDateTime&#xa;- updatedAt: LocalDateTime" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-6">
+          <mxGeometry y="30" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-8" value="" style="line;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-6">
+          <mxGeometry y="130" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-9" value="+ createTemplate(): void&#xa;+ editTemplate(): void&#xa;+ viewTemplate(): BudgetTemplate&#xa;+ deleteTemplate(): void" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-6">
+          <mxGeometry y="138" width="240" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-10" value="MonthlyBudget" style="swimlane;fontStyle=1;align=center;startSize=30;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="340" y="350" width="240" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-11" value="- id: String&#xa;- month: Month&#xa;- year: int&#xa;- income: BigDecimal&#xa;- userId: String&#xa;- templateId: String (nullable)&#xa;- categories: Map&lt;String, BudgetCategory&gt;&#xa;- createdAt: LocalDateTime&#xa;- updatedAt: LocalDateTime" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-10">
+          <mxGeometry y="30" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-12" value="" style="line;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-10">
+          <mxGeometry y="160" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-13" value="+ createMonthlyBudget(): void&#xa;+ editMonthlyBudget(): void&#xa;+ viewMonthlyBudget(): MonthlyBudget&#xa;+ deleteMonthlyBudget(): void&#xa;+ getTotal(): BigDecimal&#xa;+ getRemaining(): BigDecimal" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-10">
+          <mxGeometry y="168" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-14" value="BudgetCategory" style="swimlane;fontStyle=1;align=center;startSize=30;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="340" y="680" width="240" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-15" value="- id: String&#xa;- name: String&#xa;- amount: BigDecimal&#xa;- monthlyBudgetId: String" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-14">
+          <mxGeometry y="30" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-16" value="" style="line;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-14">
+          <mxGeometry y="110" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-17" value="+ createCategory(): void&#xa;+ editCategory(): void&#xa;+ viewCategory(): BudgetCategory&#xa;+ deleteCategory(): void" style="text;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;" vertex="1" parent="IuK-AWWu0AcfF4b1S29v-14">
+          <mxGeometry y="118" width="240" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-18" value="1 owns *" style="endArrow=open;endFill=0;exitX=1;exitY=0.25;entryX=0;entryY=0.25;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontStyle=2;" edge="1" parent="1" source="IuK-AWWu0AcfF4b1S29v-2" target="IuK-AWWu0AcfF4b1S29v-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-19" value="1 owns *" style="endArrow=open;endFill=0;exitX=1;exitY=0.75;entryX=0;entryY=0.2;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontStyle=2;" edge="1" parent="1" source="IuK-AWWu0AcfF4b1S29v-2" target="IuK-AWWu0AcfF4b1S29v-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-20" value="1 generates 12" style="endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontStyle=2;" edge="1" parent="1" source="IuK-AWWu0AcfF4b1S29v-6" target="IuK-AWWu0AcfF4b1S29v-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IuK-AWWu0AcfF4b1S29v-21" value="1 contains *" style="endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;edgeStyle=orthogonalEdgeStyle;fontSize=11;fontStyle=2;" edge="1" parent="1" source="IuK-AWWu0AcfF4b1S29v-10" target="IuK-AWWu0AcfF4b1S29v-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
