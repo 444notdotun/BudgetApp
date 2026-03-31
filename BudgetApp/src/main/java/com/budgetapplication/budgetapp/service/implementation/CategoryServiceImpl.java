@@ -7,12 +7,16 @@ import com.budgetapplication.budgetapp.data.repository.MonthlyBudgetRepository;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.EditCategory;
 import com.budgetapplication.budgetapp.dtos.response.CreateCategoryResponse;
+import com.budgetapplication.budgetapp.dtos.response.DeleteResponse;
+import com.budgetapplication.budgetapp.dtos.response.ViewCategory;
 import com.budgetapplication.budgetapp.exception.BudgetCategoryDoesNotExist;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetDoesNotExistException;
 import com.budgetapplication.budgetapp.service.interfac.CategoryService;
 import com.budgetapplication.budgetapp.utils.Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -46,14 +50,37 @@ public class CategoryServiceImpl implements CategoryService {
         BudgetCategories editedBudgetCategories = null;
         if(editCategory.getCategoryName()==null){
              editedBudgetCategories = editAmount(editCategory,budgetCategories);
+             log.info("edited Category with amount {}",editedBudgetCategories.getAmount());
         } else if (editCategory.getAmount() == null) {
             editedBudgetCategories = editName(editCategory,budgetCategories);
+            log.info("edited Category with name {}",editedBudgetCategories.getCategoryName());
         }else {
             editedBudgetCategories = editFields(editCategory,budgetCategories);
+            log.info("edited Category with fields {}",editedBudgetCategories.getCategoryId());
         }
         categoriesRepository.save(editedBudgetCategories);
         return Mapper.mapBudgetCategoryToResponse(editedBudgetCategories);
     }
+
+    @Override
+    public ViewCategory viewCategory(String monthlyBudgetId) {
+        validateMonthlyBudgetId(monthlyBudgetId);
+        List<BudgetCategories> budgetCategoriesList =categoriesRepository.findAllByMonthlyBudgetId_MonthlyBudgetId(monthlyBudgetId);
+        log.info("view category");
+        return Mapper.MapListOfCategoriesToResponse(budgetCategoriesList);
+    }
+
+    @Override
+    public DeleteResponse deleteCategory(String monthlyBudgetId, String CategoryId) {
+       validateMonthlyBudgetId(monthlyBudgetId);
+       validateBudgetCategory(CategoryId);
+        BudgetCategories budgetCategories=categoriesRepository.findByCategoryId(CategoryId);
+       categoriesRepository.deleteById(CategoryId);
+       return Mapper.MapDeleteToResponse(budgetCategories);
+
+
+    }
+
 
     private void  validateMonthlyBudgetId(String budgetId){
         if(!monthlyBudgetRepository.existsByMonthlyBudgetId(budgetId)){

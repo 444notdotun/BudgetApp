@@ -16,7 +16,7 @@ public class BudgetCategories {
     private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name = "monthlyBudgetId")
-    private MonthlyBudget MonthlyBudgetId;
+    private MonthlyBudget monthlyBudgetId;
 
     @PrePersist
     public void prePersist()

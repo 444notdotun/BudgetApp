@@ -9,6 +9,8 @@ import com.budgetapplication.budgetapp.data.repository.UserRepository;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.EditCategory;
 import com.budgetapplication.budgetapp.dtos.response.CreateCategoryResponse;
+import com.budgetapplication.budgetapp.dtos.response.DeleteResponse;
+import com.budgetapplication.budgetapp.dtos.response.ViewCategory;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetDoesNotExistException;
 import com.budgetapplication.budgetapp.service.implementation.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -116,11 +118,44 @@ class CategoryServiceTest {
         assertEquals(categoriesRepository.findByCategoryId(categoryId).getCategoryName(),createCategoryResponse.getCategoryName());
     }
 
-//    @Test
-//    void testThatBudgetCategoriesCanBeViewed(){
-//        testThatBudgetCategoryCanBeCreated();
-//        ViewCategory viewCategory =
-//    }
+    @Test
+    void testThatBudgetCategoriesCanBeViewed(){
+        testThatBudgetCategoryCanBeCreated();
+        System.out.println(monthlyBudgetId);
+        ViewCategory viewCategory = categoryService.viewCategory(monthlyBudgetId);
+        assertNotNull(viewCategory);
+        assertEquals(1L,viewCategory.getBudgetCategoriesList().size());
+    }
+
+    @Test
+    void testThatWrongMonthlyBudgetUdThrowsError(){
+        monthlyBudgetId=null;
+        assertThrows(MonthlyBudgetDoesNotExistException.class,() -> categoryService.viewCategory(monthlyBudgetId));
+    }
+
+    @Test
+    void testThatCategoryCanBeDeleted(){
+        testThatBudgetCategoryCanBeCreated();
+        DeleteResponse deleteResponse = categoryService.deleteCategory(monthlyBudgetId,categoryId);
+        assertNotNull(deleteResponse);
+        assertEquals("CATEGORY TRANSPORTATION HAS BEEN DELETED",deleteResponse.getMessage());
+    }
+
+    @Test
+    void testThatCategoryCanNotBeDeletedIfMonthlyBudgetIsWrong(){
+        testThatBudgetCategoryCanBeCreated();
+        monthlyBudgetId=null;
+        assertThrows(MonthlyBudgetDoesNotExistException.class,() -> categoryService.deleteCategory(monthlyBudgetId,categoryId));
+    }
+
+    @Test
+    void testThatCategoryCanNotBeDeletedIfBudgetCategoryIdIsWrong(){
+        testThatBudgetCategoryCanBeCreated();
+        monthlyBudgetId=null;
+        assertThrows(MonthlyBudgetDoesNotExistException.class,() -> categoryService.deleteCategory(monthlyBudgetId,categoryId));
+    }
+
+
 
 
 

@@ -4,8 +4,11 @@ import com.budgetapplication.budgetapp.data.models.BudgetCategories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CategoriesRepository extends JpaRepository<BudgetCategories, String> {
     boolean existsByCategoryId(String categoryId);
     BudgetCategories findByCategoryId(String categoryId);
+    List<BudgetCategories> findAllByMonthlyBudgetId_MonthlyBudgetId(String monthlyBudgetId);
 }
