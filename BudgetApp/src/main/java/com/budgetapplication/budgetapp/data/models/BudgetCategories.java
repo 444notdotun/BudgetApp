@@ -8,6 +8,10 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity(name = "BudgetCategories")
+@Table(indexes = {
+        @Index(name = "idx_Category_Monthly_budget",
+        columnList = "categoryType, monthlyBudgetId")
+})
 @Data
 public class BudgetCategories {
     @Id
@@ -17,6 +21,7 @@ public class BudgetCategories {
     @ManyToOne
     @JoinColumn(name = "monthlyBudgetId")
     private MonthlyBudget monthlyBudgetId;
+    private CategoryType categoryType;
 
     @PrePersist
     public void prePersist()

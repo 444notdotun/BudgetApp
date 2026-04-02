@@ -15,16 +15,6 @@ public class Users {
     @Column(unique = true)
     private String userEmail;
     private String userPassword;
-//    @OneToMany
-//    @JoinColumn(name = "budgetTemplateId")
-//    private List<BudgetTemplate> budgetTemplates;
-//    @OneToMany
-//    @JoinColumn(name = "monthlyBudgetId")
-//    private List<MonthlyBudget> monthlyBudgets;
-//    public Users() {
-//        this.budgetTemplates = new ArrayList<>();
-//        this.monthlyBudgets = new ArrayList<>();
-//    }
     @PrePersist
     public void prePersist()
     {

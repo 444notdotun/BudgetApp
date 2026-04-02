@@ -23,7 +23,7 @@ public class MonthlyBudget {
     private BigDecimal income;
     @ManyToOne
     @JoinColumn(name = "userId" ,nullable = false)
-    private Users UserId;
+    private Users userId;
     @ManyToOne
     @JoinColumn(name = "BudgetTemplateId")
     private BudgetTemplate templateId;
