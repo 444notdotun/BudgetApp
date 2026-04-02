@@ -1,12 +1,12 @@
 package com.budgetapplication.budgetapp.utils;
 
 import com.budgetapplication.budgetapp.data.models.BudgetCategories;
+import com.budgetapplication.budgetapp.data.models.BudgetTemplate;
 import com.budgetapplication.budgetapp.data.models.MonthlyBudget;
 import com.budgetapplication.budgetapp.data.models.Users;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
-import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -47,6 +47,7 @@ public class Mapper {
         monthlyBudget.setYear(createMonthlyBudgetRequest.getYear());
         monthlyBudget.setIncome(createMonthlyBudgetRequest.getIncome());
         monthlyBudget.setUserId(users);
+        monthlyBudget.setBudgetTemplateId(createMonthlyBudgetRequest.getBudgetTemplate());
         return  monthlyBudget;
     }
 
@@ -58,7 +59,7 @@ public class Mapper {
         createMonthlyBudgetResponse.setIncome(monthlyBudget.getIncome());
         createMonthlyBudgetResponse.setYear(monthlyBudget.getYear());
         createMonthlyBudgetResponse.setMonth(monthlyBudget.getMonth());
-        createMonthlyBudgetResponse.setTemplateId(monthlyBudget.getTemplateId());
+        createMonthlyBudgetResponse.setTemplateId(monthlyBudget.getBudgetTemplateId());
         return  createMonthlyBudgetResponse;
     }
 
@@ -85,5 +86,30 @@ public class Mapper {
         totalRemainingBalance.setMessage("TOTAL BALANCE FOR "+monthlyBudget.getMonth()+" IS "+sumOfExpense.toString());
         return  totalRemainingBalance;
 
+    }
+
+    public static void mapBudgetTemplate(CreateMonthlyBudgetRequest createMonthlyBudgetRequest) {
+
+    }
+
+    public static BudgetTemplate setTemplateFields(CreateMonthlyBudgetRequest createMonthlyBudgetRequest, Users userId) {
+        BudgetTemplate budgetTemplate = new BudgetTemplate();
+        budgetTemplate.setYear(createMonthlyBudgetRequest.getYear());
+        budgetTemplate.setUser(userId);
+        return budgetTemplate;
+    }
+
+    public static CreateTemplateResponse mapCreateTemplateResponse(List<CreateMonthlyBudgetResponse> monthlyBudgetResponseList, BudgetTemplate budgetTemplate) {
+        CreateTemplateResponse createTemplateResponse = new CreateTemplateResponse();
+        createTemplateResponse.setMonthlyBudgets(monthlyBudgetResponseList);
+        createTemplateResponse.setYear(budgetTemplate.getYear());
+        createTemplateResponse.setTemplateId(budgetTemplate.getBudgetTemplateId());
+        return createTemplateResponse;
+    }
+
+    public static EditTemplateResponse mapEditTemplateREsponse(BudgetTemplate budgetTemplate) {
+        EditTemplateResponse  editTemplateResponse = new EditTemplateResponse();
+        editTemplateResponse.setMessage("TEMPLATE YEAR CHANGED TO "+budgetTemplate.getYear());
+        return  editTemplateResponse;
     }
 }
