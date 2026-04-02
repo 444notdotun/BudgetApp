@@ -11,6 +11,7 @@ import com.budgetapplication.budgetapp.dtos.request.EditCategory;
 import com.budgetapplication.budgetapp.dtos.response.CreateCategoryResponse;
 import com.budgetapplication.budgetapp.dtos.response.DeleteResponse;
 import com.budgetapplication.budgetapp.dtos.response.ViewCategory;
+import com.budgetapplication.budgetapp.exception.BudgetCategoryDoesNotExist;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetDoesNotExistException;
 import com.budgetapplication.budgetapp.service.implementation.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -151,8 +152,8 @@ class CategoryServiceTest {
     @Test
     void testThatCategoryCanNotBeDeletedIfBudgetCategoryIdIsWrong(){
         testThatBudgetCategoryCanBeCreated();
-        monthlyBudgetId=null;
-        assertThrows(MonthlyBudgetDoesNotExistException.class,() -> categoryService.deleteCategory(monthlyBudgetId,categoryId));
+        categoryId=null;
+        assertThrows(BudgetCategoryDoesNotExist.class,() -> categoryService.deleteCategory(monthlyBudgetId,categoryId));
     }
 
 
