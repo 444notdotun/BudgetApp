@@ -12,7 +12,7 @@ import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 import com.budgetapplication.budgetapp.exception.MonthInputException;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetException;
-import com.budgetapplication.budgetapp.exception.UserNotFoundException;
+import com.budgetapplication.budgetapp.exception.UserNotFound;
 import com.budgetapplication.budgetapp.service.interfac.CategoryService;
 import com.budgetapplication.budgetapp.service.interfac.MonthlyBudgetService;
 import com.budgetapplication.budgetapp.utils.Mapper;
@@ -137,7 +137,7 @@ public class MonthlyBudgetImpl implements MonthlyBudgetService {
 
     private void validateUserId(String userId) {
         if(!userRepository.existsByUserId(userId)){
-            throw  new UserNotFoundException("user not found");
+            throw  new UserNotFound("user not found");
         }
     }
 

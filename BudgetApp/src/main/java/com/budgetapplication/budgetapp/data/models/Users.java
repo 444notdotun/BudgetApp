@@ -13,7 +13,7 @@ public class Users {
     @Id
     private String userId;
     @Column(unique = true)
-    private String userEmail;
+    private String email;
     private String userPassword;
     @PrePersist
     public void prePersist()

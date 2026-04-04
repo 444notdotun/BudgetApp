@@ -15,7 +15,7 @@ import java.time.Month;
 @Data
 @Table(indexes = {
         @Index(name = "idx_userId_templateId",
-        columnList = "userId,templateId")
+        columnList = "userId,budgetTemplateId")
 })
 public class MonthlyBudget {
     @Id

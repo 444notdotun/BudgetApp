@@ -6,6 +6,7 @@ import com.budgetapplication.budgetapp.data.models.MonthlyBudget;
 import com.budgetapplication.budgetapp.data.models.Users;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
+import com.budgetapplication.budgetapp.dtos.request.RegisterRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 
 import java.math.BigDecimal;
@@ -111,5 +112,20 @@ public class Mapper {
         EditTemplateResponse  editTemplateResponse = new EditTemplateResponse();
         editTemplateResponse.setMessage("TEMPLATE YEAR CHANGED TO "+budgetTemplate.getYear());
         return  editTemplateResponse;
+    }
+
+    public static Users mapUserToRequest(RegisterRequest request) {
+        Users users = new Users();
+        users.setEmail(request.getEmail());
+        users.setUserPassword(request.getPassword());
+        return users;
+    }
+
+    public static AuthResponse mapUserToResponse(Users users, String s) {
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setUserId(users.getUserId());
+        authResponse.setEmail(users.getEmail());
+        authResponse.setToken(s);
+        return  authResponse;
     }
 }

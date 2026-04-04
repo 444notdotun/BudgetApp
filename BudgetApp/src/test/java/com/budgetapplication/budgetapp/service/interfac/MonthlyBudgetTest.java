@@ -9,7 +9,7 @@ import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 import com.budgetapplication.budgetapp.exception.MonthInputException;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetException;
-import com.budgetapplication.budgetapp.exception.UserNotFoundException;
+import com.budgetapplication.budgetapp.exception.UserNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ class MonthlyBudgetTest {
     @Test
     void testThatMonthlyBudgetCanNotBeCreatedIfUserDetailIsWrong() {
         userId=null;
-        assertThrows(UserNotFoundException.class,() -> monthlyBudgetService.createMonthlyBudget(userId,createMonthlyBudgetRequest));
+        assertThrows(UserNotFound.class,() -> monthlyBudgetService.createMonthlyBudget(userId,createMonthlyBudgetRequest));
     }
 
     @Test
