@@ -3,6 +3,7 @@ package com.budgetapplication.budgetapp.controller;
 import com.budgetapplication.budgetapp.data.models.MonthlyBudget;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
+import com.budgetapplication.budgetapp.dtos.request.EditBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 import com.budgetapplication.budgetapp.service.interfac.MonthlyBudgetService;
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class MonthlyBudgetController {
     }
 
     @PatchMapping("/editMonthlyBudget/{monthlyBudgetId}")
-    public ResponseEntity<ApiResponse<CreateMonthlyBudgetResponse>> editMonthlyBudget(@Valid @RequestBody CreateMonthlyBudgetRequest createMonthlyBudgetRequest, @PathVariable String monthlyBudgetId){
+    public ResponseEntity<ApiResponse<CreateMonthlyBudgetResponse>> editMonthlyBudget(@Valid @RequestBody EditBudgetRequest createMonthlyBudgetRequest, @PathVariable String monthlyBudgetId){
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(new ApiResponse<>("MonthlyBudgetId has been edited",monthlyBudgetService
                         .editMontlyBudget(createMonthlyBudgetRequest,monthlyBudgetId)));

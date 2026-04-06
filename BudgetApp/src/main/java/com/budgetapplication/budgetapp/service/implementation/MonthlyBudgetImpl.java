@@ -9,6 +9,7 @@ import com.budgetapplication.budgetapp.data.repository.MonthlyBudgetRepository;
 import com.budgetapplication.budgetapp.data.repository.UserRepository;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
+import com.budgetapplication.budgetapp.dtos.request.EditBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 import com.budgetapplication.budgetapp.exception.MonthInputException;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetException;
@@ -40,20 +41,20 @@ public class MonthlyBudgetImpl implements MonthlyBudgetService {
         validateUserId(userId);
         Users users = userRepository.findByUserId(userId);
         MonthlyBudget monthlyBudget=Mapper.mapRequestToMonthlyBudget(createMonthlyBudgetRequest,users);
-        monthlyBudget.setMonth(validateMonth(createMonthlyBudgetRequest));
+        monthlyBudget.setMonth(validateMonth(createMonthlyBudgetRequest.getMonth()));
         monthlyBudgetRepository.save(monthlyBudget);
         return Mapper.mapMonthlyBudgetToResponse(monthlyBudget);
     }
 
     @Override
-    public CreateMonthlyBudgetResponse editMontlyBudget(CreateMonthlyBudgetRequest createMonthlyBudgetRequest,String monthlyBudgetId) {
+    public CreateMonthlyBudgetResponse editMontlyBudget(EditBudgetRequest createMonthlyBudgetRequest, String monthlyBudgetId) {
         validateMonthlyBudgetId(monthlyBudgetId);
         MonthlyBudget editedMonthlyBudget = monthlyBudgetRepository.findByMonthlyBudgetId(monthlyBudgetId);
         if(createMonthlyBudgetRequest.getIncome()!=null){
             editedMonthlyBudget.setIncome(createMonthlyBudgetRequest.getIncome());
         }
         if(createMonthlyBudgetRequest.getMonth()!=null){
-            editedMonthlyBudget.setMonth(validateMonth(createMonthlyBudgetRequest));
+            editedMonthlyBudget.setMonth(validateMonth(createMonthlyBudgetRequest.getMonth()));
         }
         if(createMonthlyBudgetRequest.getYear()!=0){
             editedMonthlyBudget.setYear(createMonthlyBudgetRequest.getYear());
@@ -141,8 +142,8 @@ public class MonthlyBudgetImpl implements MonthlyBudgetService {
         }
     }
 
-    private Month validateMonth(CreateMonthlyBudgetRequest createMonthlyBudgetRequest) {
-        switch (createMonthlyBudgetRequest.getMonth().toLowerCase()){
+    private Month validateMonth(String createMonthlyBudgetRequest) {
+        switch (createMonthlyBudgetRequest.toLowerCase()){
             case "january"->{return Month.JANUARY;}
             case "february"->{return Month.FEBRUARY;}
             case  "march"->{return Month.MARCH;}

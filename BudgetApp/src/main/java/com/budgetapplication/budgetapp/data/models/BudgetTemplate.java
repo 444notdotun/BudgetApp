@@ -4,6 +4,7 @@ import com.budgetapplication.budgetapp.utils.IdGenerator;
 import com.budgetapplication.budgetapp.utils.Type;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -21,7 +22,7 @@ public class BudgetTemplate {
     @ManyToOne
     @JoinColumn(name = "users")
     private Users user;
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private  LocalDateTime updatedAt;

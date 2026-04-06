@@ -4,7 +4,6 @@ import com.budgetapplication.budgetapp.data.models.Users;
 import com.budgetapplication.budgetapp.data.repository.UserRepository;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.request.EditTemplate;
-import com.budgetapplication.budgetapp.dtos.response.CreateMonthlyBudgetResponse;
 import com.budgetapplication.budgetapp.dtos.response.CreateTemplateResponse;
 import com.budgetapplication.budgetapp.dtos.response.DeleteTemplateResponse;
 import com.budgetapplication.budgetapp.dtos.response.EditTemplateResponse;

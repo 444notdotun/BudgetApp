@@ -20,8 +20,6 @@ public class BudgetTemplateController {
 @Autowired
     private  BudgetTemplateService budgetTemplateService;
 
-
-
     @PostMapping("")
     public ResponseEntity<ApiResponse<CreateTemplateResponse>> createTemplate(
             @AuthenticationPrincipal String userId,

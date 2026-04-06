@@ -1,20 +1,13 @@
 package com.budgetapplication.budgetapp.dtos.request;
 
-import com.budgetapplication.budgetapp.data.models.BudgetTemplate;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.math.BigDecimal;
 @Data
-public class CreateMonthlyBudgetRequest {
-    @Min(value = 2025)
+public class EditBudgetRequest {
     private int year;
-    @NotBlank
     private String month;
-    @Min(value = 0)
     private BigDecimal income;
-
-    private BudgetTemplate budgetTemplate;
-
 }

@@ -2,10 +2,14 @@ package com.budgetapplication.budgetapp.data.models;
 
 import com.budgetapplication.budgetapp.utils.IdGenerator;
 import com.budgetapplication.budgetapp.utils.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import tools.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +24,7 @@ import java.time.Month;
 public class MonthlyBudget {
     @Id
     private String monthlyBudgetId;
+
     private Month month;
     private int year;
     private BigDecimal income;
@@ -29,9 +34,12 @@ public class MonthlyBudget {
     @ManyToOne
     @JoinColumn(name = "budgetTemplateId")
     private BudgetTemplate budgetTemplateId;
-    @CreatedDate
+
+
+    @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
+
     private LocalDateTime updatedAt;
 
     @PrePersist

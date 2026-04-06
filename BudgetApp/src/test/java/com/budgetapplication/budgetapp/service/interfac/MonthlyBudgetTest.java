@@ -6,6 +6,7 @@ import com.budgetapplication.budgetapp.data.repository.MonthlyBudgetRepository;
 import com.budgetapplication.budgetapp.data.repository.UserRepository;
 import com.budgetapplication.budgetapp.dtos.request.CreateCategoryRequest;
 import com.budgetapplication.budgetapp.dtos.request.CreateMonthlyBudgetRequest;
+import com.budgetapplication.budgetapp.dtos.request.EditBudgetRequest;
 import com.budgetapplication.budgetapp.dtos.response.*;
 import com.budgetapplication.budgetapp.exception.MonthInputException;
 import com.budgetapplication.budgetapp.exception.MonthlyBudgetException;
@@ -31,6 +32,7 @@ class MonthlyBudgetTest {
     CreateMonthlyBudgetRequest createMonthlyBudgetRequest;
     String  monthlyBudgetId;
     CreateCategoryRequest  createCategoryRequest;
+    EditBudgetRequest editBudgetRequest;
 
     @BeforeEach
     void setUp() {
@@ -45,6 +47,10 @@ class MonthlyBudgetTest {
         createCategoryRequest.setCategoryName("TRANSPORTATION)");
         createCategoryRequest.setAmount(new BigDecimal("200000"));
         createCategoryRequest.setCategoryType(CategoryType.EXPENSE);
+        editBudgetRequest = new EditBudgetRequest();
+        editBudgetRequest.setMonth(createMonthlyBudgetRequest.getMonth());
+        editBudgetRequest.setIncome(new BigDecimal("200000"));
+        editBudgetRequest.setYear(2026);
 
     }
 
@@ -72,35 +78,35 @@ class MonthlyBudgetTest {
     @Test
     void testThatMonthlyBudgetCanBeEdited(){
         monthlyBudgetCanBeCreated();
-        createMonthlyBudgetRequest.setIncome(new BigDecimal(10));
-        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(createMonthlyBudgetRequest,monthlyBudgetId);
+        editBudgetRequest.setIncome(new BigDecimal(10));
+        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(editBudgetRequest,monthlyBudgetId);
         assertNotNull(createMonthlyBudgetResponse);
-        assertEquals(createMonthlyBudgetResponse.getIncome(),createMonthlyBudgetRequest.getIncome());
+        assertEquals(createMonthlyBudgetResponse.getIncome(),editBudgetRequest.getIncome());
     }
 
     @Test
     void testThatMonthlyBudgetCanYearCanBeEdited(){
         monthlyBudgetCanBeCreated();
-        createMonthlyBudgetRequest.setYear(2028);
-        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(createMonthlyBudgetRequest,monthlyBudgetId);
+        editBudgetRequest.setYear(2028);
+        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(editBudgetRequest,monthlyBudgetId);
         assertNotNull(createMonthlyBudgetResponse);
-        assertEquals(createMonthlyBudgetResponse.getYear(),createMonthlyBudgetRequest.getYear());
+        assertEquals(createMonthlyBudgetResponse.getYear(),editBudgetRequest.getYear());
     }
 
     @Test
     void testThatMonthlyBudgetCanNotBeEditedIfMonthInputIsWrong(){
         monthlyBudgetCanBeCreated();
-        createMonthlyBudgetRequest.setMonth("ghs");
-        assertThrows(MonthInputException.class,() -> monthlyBudgetService.editMontlyBudget(createMonthlyBudgetRequest,monthlyBudgetId));
+        editBudgetRequest.setMonth("ghs");
+        assertThrows(MonthInputException.class,() -> monthlyBudgetService.editMontlyBudget(editBudgetRequest,monthlyBudgetId));
     }
 
     @Test
     void testThatMonthlyBudgetMonthCanBeEdited(){
         monthlyBudgetCanBeCreated();
-        createMonthlyBudgetRequest.setMonth("JULY");
-        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(createMonthlyBudgetRequest,monthlyBudgetId);
+        editBudgetRequest.setMonth("JULY");
+        CreateMonthlyBudgetResponse createMonthlyBudgetResponse = monthlyBudgetService.editMontlyBudget(editBudgetRequest,monthlyBudgetId);
         assertNotNull(createMonthlyBudgetResponse);
-        assertEquals(createMonthlyBudgetResponse.getMonth().toString(),createMonthlyBudgetRequest.getMonth());
+        assertEquals(createMonthlyBudgetResponse.getMonth().toString(),editBudgetRequest.getMonth());
     }
 
     @Test

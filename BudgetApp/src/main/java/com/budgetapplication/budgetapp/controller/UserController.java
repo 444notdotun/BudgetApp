@@ -29,4 +29,6 @@ public class UserController {
     public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest loginRequest){
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>("login is successful",authService.login(loginRequest)));
     }
+
+
 }
