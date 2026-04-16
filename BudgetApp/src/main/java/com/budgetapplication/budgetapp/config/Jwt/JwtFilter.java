@@ -27,6 +27,11 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        String path = request.getServletPath();
+        if (path.startsWith("/users")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
