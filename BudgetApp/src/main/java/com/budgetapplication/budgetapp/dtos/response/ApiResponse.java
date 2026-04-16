@@ -14,12 +14,7 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
-//    public ApiResponse(AuthResponse register) {
-//        this.success = data!=null;
-//        this.message = getMessage();
-//        this.data = register;
-//
-//    }
+
 }
 
 
