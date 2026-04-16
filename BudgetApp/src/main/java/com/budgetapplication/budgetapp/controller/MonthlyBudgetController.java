@@ -36,7 +36,7 @@ public class MonthlyBudgetController {
 
     @GetMapping("/viewAll")
     public  ResponseEntity<ApiResponse<ViewAllMonthlyBudget>> viewAllBudgets(@AuthenticationPrincipal String userId){
-        return ResponseEntity.status(HttpStatus.FOUND).
+        return ResponseEntity.status(HttpStatus.OK).
                 body(new ApiResponse<>("budgets found!",monthlyBudgetService
                         .viewAll(userId)));
     }
